@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get "/the_product" => "products#single_product"
     get "/second_product" => "products#second"
     get "/every_product" => "products#all"
-    get "/dynamic_product_query" => "products#query"
+    get "/dynamic_product_query" => "products#show"
+    get "/products/:id" => "products#show"
   end
 end
