@@ -13,4 +13,15 @@ class Api::ProductsController < ApplicationController
     @products = Product.all
     render 'every.json.jb'
   end
+
+  def query
+    # take user params
+    # find the value
+    # look for that value in the db
+    the_id = params[:product]
+    # find the correct product
+    @product = Product.find_by(id: the_id)
+    # show that product to the user
+    render 'query.json.jb'
+  end
 end
