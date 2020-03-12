@@ -26,12 +26,18 @@ class Api::ProductsController < ApplicationController
 
   def update
     @product = Product.find_by(id: params[:id])
-    if @product.update(
-        name: params[:name] || @product.name,
-        price: params[:price] || @product.price,
-        description: params[:description] || @product.description,
-        image_url: params[:image_url] || @product.image_url
-      )
+    # if @product.update(
+    #     name: params[:name] || @product.name,
+    #     price: params[:price] || @product.price,
+    #     description: params[:description] || @product.description,
+    #     image_url: params[:image_url] || @product.image_url
+    #   )
+    @product.name = params[:name] || @product.name
+    @product.price = params[:price] || @product.price
+    @product.description = params[:description] || @product.description
+    @product.image_url = params[:image_url] || @product.image_url
+
+    if @product.save
       render 'show.json.jb'
     else
       render json: {errors: @product.errors.full_messages}, status: :unprocessable_entity
