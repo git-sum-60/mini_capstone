@@ -26,13 +26,17 @@ class Api::ProductsController < ApplicationController
 
   def update
     @product = Product.find_by(id: params[:id])
-    @product.update(
-      name: params[:name] || @product.name,
-      price: params[:price] || @product.price,
-      description: params[:description] || @product.description,
-      image_url: params[:image_url] || @product.image_url
-    )
-    render 'show.json.jb'
+    if @product.update(
+        name: params[:name] || @product.name,
+        price: params[:price] || @product.price,
+        description: params[:description] || @product.description,
+        image_url: params[:image_url] || @product.image_url
+      )
+      render 'show.json.jb'
+    else
+      render json: {errors: @product.errors.full_messages}, status: :unprocessable_entity
+    end
+      
   end
 
   def destroy
@@ -41,3 +45,11 @@ class Api::ProductsController < ApplicationController
     render json: {message: "Product has been removed"}
   end
 end
+
+
+
+# high level
+
+# add validations in model
+# test in rails console with .save, .errors.full_messages
+# add happy sad paths in controller
