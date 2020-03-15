@@ -18,3 +18,4 @@ product.save
 
 product = Product.new({name: "Yoda sleeping bag", price: 40, description: "For real", image_url: "https://staticdelivery.nexusmods.com/mods/1151/images/12353-0-1461721930.png"})
 product.save
+

@@ -7,5 +7,6 @@
   is_discounted: product.is_discounted?,
   tax: product.tax,
   total: product.total,
-  created_at: product.created_at
+  created_at: product.created_at,
+  supplier: product.supplier.name
 }
