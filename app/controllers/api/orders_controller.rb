@@ -1,4 +1,9 @@
 class Api::OrdersController < ApplicationController
+  def index
+    @orders = current_user.orders
+    render "index.json.jb"
+  end
+  
   def create
     product = Product.find_by(id: params[:product_id])
     the_subtotal = params[:quantity].to_i * product.price
