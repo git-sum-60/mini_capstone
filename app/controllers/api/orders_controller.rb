@@ -3,6 +3,11 @@ class Api::OrdersController < ApplicationController
     @orders = current_user.orders
     render "index.json.jb"
   end
+
+  def show
+    @order = Order.find_by(id: params[:id])
+    render "show.json.jb"
+  end
   
   def create
     product = Product.find_by(id: params[:product_id])
