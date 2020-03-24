@@ -15,13 +15,14 @@ class Api::OrdersController < ApplicationController
     @carted_products = current_user.carted_products.where(status: 'carted')
 
     subtotal = 0
+    tax = 0 
+    total = 0
     @carted_products.each do |carted_product|
       subtotal += carted_product.product.price * carted_product.quantity
+      tax += carted_product.product.tax * carted_product.quantity
+      total += carted_product.product.total * carted_product.quantity
     end
     
-    tax_rate = 0.09
-    tax = subtotal * tax_rate
-    total = subtotal + tax
     
 
     @order = Order.new(
