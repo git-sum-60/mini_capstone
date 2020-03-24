@@ -33,6 +33,12 @@ class Api::OrdersController < ApplicationController
     )
 
     @order.save
+
+    # @carted_products.each do |cp|
+    #   cp.update(order_id: @order.id, status: 'purchased')
+    # end
+
+    @carted_products.update_all(status: 'purchased', order_id: @order.id)
     
     render "show.json.jb"
   end
